@@ -2,7 +2,7 @@
 
 self.addEventListener('push', function(event) {
   console.log('Received push');
-  let notificationTitle = 'Hello';
+  let notificationTitle = '通知';
   const notificationOptions = {
     body: 'Thanks for sending this push msg.',
     icon: './images/icon-192x192.png',
@@ -15,8 +15,7 @@ self.addEventListener('push', function(event) {
 
   if (event.data) {
     const dataText = event.data.text();
-    notificationTitle = 'Received Payload';
-    notificationOptions.body = `Push data: '${dataText}'`;
+    notificationOptions.body = `内容: '${dataText}'`;
   }
 
   event.waitUntil(
