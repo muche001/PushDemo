@@ -1,20 +1,45 @@
 'use strict';
 
 self.addEventListener('push', function(event) {
-  console.log('Received a push message', event);
+  console.log('Received push');
+  let notificationTitle = 'Hello';
+  const notificationOptions = {
+    body: 'Thanks for sending this push msg.',
+    icon: './images/icon-192x192.png',
+    badge: './images/icon-192x192.png',
+    tag: 'CuriousPushDemo',
+    data: {
+      url: 'https://muche001.github.io/PushDemo/',
+    },
+  };
 
-  var title = 'Yay a message.';
-  var body = 'We have received a push message.';
-  var icon = '/images/icon-192x192.png';
-  var tag = 'simple-push-demo-notification-tag';
+  if (event.data) {
+    const dataText = event.data.text();
+    notificationTitle = 'Received Payload';
+    notificationOptions.body = `Push data: '${dataText}'`;
+  }
 
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: body,
-      icon: icon,
-      tag: tag
-    })
+    Promise.all([
+      self.registration.showNotification(
+        notificationTitle, notificationOptions),
+      self.analytics.trackEvent('push-received'),
+    ])
   );
+  // console.log('Received a push message', event);
+
+  // var title = 'Yay a message.';
+  // var body = 'We have received a push message.';
+  // var icon = '/images/icon-192x192.png';
+  // var tag = 'simple-push-demo-notification-tag';
+
+  // event.waitUntil(
+  //   self.registration.showNotification(title, {
+  //     body: body,
+  //     icon: icon,
+  //     tag: tag
+  //   })
+  // );
 });
 
 self.addEventListener('notificationclick', function(event) {
