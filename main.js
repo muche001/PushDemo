@@ -60,7 +60,7 @@ function showCurlCommand(subscription) {
   // var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
   //   '" --header Content-Type:"application/json" ' + ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
-  curlCommandDiv.textContent = subscription;
+  curlCommandDiv.textContent = JSON.stringify(subscription);
 }
 
 function unsubscribe() {
