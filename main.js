@@ -40,27 +40,27 @@ function sendSubscriptionToServer(subscription) {
 
   // This is just for demo purposes / an easy to test by
   // generating the appropriate cURL command
-  showCurlCommand(mergedEndpoint);
+  showCurlCommand(subscription);
 }
 
 // NOTE: This code is only suitable for GCM endpoints,
 // When another browser has a working version, alter
 // this to send a PUSH request directly to the endpoint
-function showCurlCommand(mergedEndpoint) {
+function showCurlCommand(subscription) {
   // The curl command to trigger a push message straight from GCM
-  if (mergedEndpoint.indexOf(GCM_ENDPOINT) !== 0) {
-    window.Demo.debug.log('This browser isn\'t currently ' +
-      'supported for this demo');
-    return;
-  }
+  // if (mergedEndpoint.indexOf(GCM_ENDPOINT) !== 0) {
+  //   window.Demo.debug.log('This browser isn\'t currently ' +
+  //     'supported for this demo');
+  //   return;
+  // }
 
-  var endpointSections = mergedEndpoint.split('/');
-  var subscriptionId = endpointSections[endpointSections.length - 1];
+  // var endpointSections = mergedEndpoint.split('/');
+  // var subscriptionId = endpointSections[endpointSections.length - 1];
 
-  var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
-    '" --header Content-Type:"application/json" ' + ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
+  // var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
+  //   '" --header Content-Type:"application/json" ' + ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
-  curlCommandDiv.textContent = curlCommand;
+  curlCommandDiv.textContent = subscription;
 }
 
 function unsubscribe() {
